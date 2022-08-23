@@ -1,24 +1,17 @@
-import { useState } from "react";
-import "./App.css";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Favs from "./pages/Favs";
+import MovieDetails from "./pages/MovieDetail";
+import Movies from "./pages/Movies";
 
 function App() {
-  const [movies, setMovies] = useState({});
-
-  const handleClick = () => {
-    fetch(
-      "https://api.themoviedb.org/3/trending/all/day?api_key=c33b955b56b34e6ac8cf34064ef78bbf"
-    )
-      .then((request) => request.json())
-      .then((data) => setMovies(data));
-  };
-
   return (
-    <>
-      <div>
-        <h1>Demo - {movies.results?.[0]?.original_name}</h1>
-        <button onClick={handleClick}>Click</button>
-      </div>
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/movies" element={<Movies />} />
+        <Route path="/favs" element={<Favs />} />
+        <Route path="/thinking" element={<MovieDetails />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
